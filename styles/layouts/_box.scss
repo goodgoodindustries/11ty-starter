@@ -1,0 +1,17 @@
+.box {
+  --color-light: var(--background-color);
+  --color-dark: var(--text-color);
+  padding: var(--s1);
+  border: var(--border-thin) solid;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+.box * {
+  color: inherit;
+}
+
+.box.invert {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}

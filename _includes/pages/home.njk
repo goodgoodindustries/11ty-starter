@@ -1,0 +1,21 @@
+{% extends 'layouts/default.njk' %}
+
+{% block title %}
+  <title>{{ site[locale].home }} | {{ site[locale].projectName }}</title>
+{% endblock %}
+
+{% block content %}
+  <div class="stack">
+    <h2>{{ site[locale].h2Label }}</h2>
+    <h3>{{ site[locale].favoriteColor('blue') }}</h3>
+    <h4>This is an h4 tag.</h4>
+    <h5>This is an h5 tag.</h5>
+    <h6>This is an h6 tag.</h6>
+    <p>This is a p tag.</p>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/scripts/home.js" type="module"></script>
+  <script src="/scripts/legacy/home.js" nomodule></script>
+{% endblock %}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+      <title>11ty Starter</title>
+    {% endblock %}
+    {% block description %}
+      <meta name="Description" content="A template that can be extended for future static website projects. Includes Sass/PostCSS support, module bundling/minification, legacy JavaScript builds, and PWA suppport, all without sacrificing progressive enhancement or forcing client-side rendering.">
+    {% endblock %}
+    <meta name="theme-color" content="#f8f8f8">
+    <link rel="apple-touch-icon" href="/images/icon_192.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/images/icon_dark_mode.png" type="image/png">
+
+    <link href="/styles/styles.css" rel="stylesheet">
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    {% include '../header.njk' %}
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    {% include '../footer.njk' %}
+
+    {% block scripts %}{% endblock %}
+
+    <script>
+      const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function updateFavicon() {
+        if (darkModeQuery.matches) {
+          document.querySelector('link[rel="shortcut icon"]').href = '/images/icon_dark_mode.png';
+        } else {
+          document.querySelector('link[rel="shortcut icon"]').href = '/images/icon.png';
+        }
+      }
+
+      darkModeQuery.addListener(updateFavicon);
+      updateFavicon();
+    </script>
+
+    {% if env.environment === 'production' %}
+      <script>
+        // if browser supports service workers, register it
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js');
+
+          // check to see if you have an active service worker
+          if (navigator.serviceWorker.controller) {
+            // add an event listener
+            window.addEventListener("load", () => {
+              // tell the service worker to clean up
+              navigator.serviceWorker.controller.postMessage("clean up");
+            });
+          }
+        }
+      </script>
+    {% endif %}
+  </body>
+</html>
