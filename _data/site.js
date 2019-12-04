@@ -1,5 +1,4 @@
 module.exports = {
-  locale: 'en',
   en: {
     projectName: '11ty Starter',
     home: 'Home',
