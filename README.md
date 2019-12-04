@@ -1,6 +1,10 @@
 # 11ty-starter
 Starter template for 11ty projects, with Sass support, JS bundling with modern/legacy builds, PWA checklist items, and localization patterns. A major goal of this project is prioritizing convention over configuration so you can get started writing the code that matters as quickly as possible without futzing over .config files. As such, it is opinionated, and your mileage may vary.
 
+The goal of this project is to fill in the gap between developer experience and user experience. The major JS frameworks all have fancy starter templates that make it easy to get started building in React, Vue, or Angular. Too easy. These tools all have a place, but it's overkill for a simple blog, and the tendency to reach for highly engineered, well-vetted, solve-every-problem-that-could-exist solutions is precisely why the amount of JavaScript being sent over the wire these days keeps ballooning. That will probably get worse as 5G comes into play. The more we can justify adding JavaScript, the more we'll do it, and the more the average user will suffer for it.
+
+This project is JAMStack to the core, and it believes that rendering markup should be left to HTML, and styling that markup should be left to CSS. JS should be sprinkled in as needed - the last tool you reach for in the box, should you need it. Whenever possible, write less code.
+
 ## Getting Started
 Clone this project, `npm install`, then `npm run dev` to run the application in development mode with watchers on Sass, JS, and templates picked up by 11ty.
 
