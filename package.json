@@ -16,7 +16,7 @@
     "build:styles:process": "postcss _site/styles/temp.css -o _site/styles/styles.css",
     "build:styles": "run-s build:styles:compile build:styles:process",
     "build:scripts": "rollup -c",
-    "postbuild:scripts": "npx babel _site/scripts --out-dir _site/scripts/legacy",
+    "postbuild:scripts": "npx babel _site/scripts/bundled --out-dir _site/scripts/legacy",
     "build:11ty": "ELEVENTY_ENV=production npx @11ty/eleventy",
     "prebuild": "npm run clean",
     "build": "run-s build:11ty build:styles build:scripts",

@@ -1,5 +1,5 @@
-import add from './utilities/add';
-import subtract from './utilities/subtract';
+import add from './utilities/add.mjs';
+import subtract from './utilities/subtract.mjs';
 
 console.log(add(1, 2));
 console.log(add(3, 4));

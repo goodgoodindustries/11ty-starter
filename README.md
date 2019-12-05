@@ -44,16 +44,18 @@ These were my goals for the ideal JS setup:
 2. Must be able to write modern code (ES6 imports, arrow functions, etc.)
 3. Must produce a legacy build for older browsers (mainly IE11), and a modern build for newer browsers (both minified)
 
-Rollup works quite well for Point 1. By using the file system to loop through scripts, new entrypoints are automatically picked up and dropped into the output folder by convention. Any `.js` file in the scripts folder (but not subfolders) is treated as an entrypoint and is bundled and dropped into `_site/scripts`. Combine that with tree-shaking and smaller, more readable bundles compared to webpack, and it's pretty well suited for basic needs.
+Rollup works quite well for Point 1. By using the file system to loop through scripts, new entrypoints are automatically picked up and dropped into the output folder by convention. Any `.js` file in the scripts folder (but not subfolders) is treated as an entrypoint and is bundled and dropped into `_site/scripts/bundled`. Combine that with tree-shaking and smaller, more readable bundles compared to webpack, and it's pretty well suited for basic needs.
 
 That would be good enough for most modern browsers, but if you need to support IE11 or you have a more global audience, Babel is included to handle Points 2 and 3. It runs only on production builds, after Rollup has bundled the files. The output from that is put into `_site/scripts/legacy`, following the same naming conventions. To handle serving the right files to the right browsers, follow this pattern:
 
 ```html
-<script src="/scripts/home.js" type="module"></script>
+<script src="/scripts/bundled/home.js" type="module"></script>
 <script src="/scripts/legacy/home.js" nomodule></script>
 ```
 
 No polyfills are included out of the box, so be sure to provide them if needed for older browsers.
+
+Optionally, you can choose not to serve bundled code to modern browsers. To do this, use `.mjs` instead of `.js` for your file extensions, and reference `/scripts/[filename].mjs` instead of the bundled file's path. This is really only a good option over HTTP/2, and even so, it may still be more performant to serve the bundled script. If you use dynamic imports to handle code-splitting, this may also work out better, but you should definitely test both scenarios and see which is best for your use case.
 
 ### PWA Support
 It's mostly icons and setting the right meta tags. Be sure to change those as applicable for your project. A basic service worker is provided, and should cover general cases pretty well, but it will most likely require customization depending on your needs.
